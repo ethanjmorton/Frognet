@@ -67,7 +67,7 @@
         const errorMessage = document.getElementById('error-message');
 
         if (url && (url.startsWith('http://') || url.startsWith('https://'))) {
-            const proxyUrl = `https://www.pythonanywhere.com/user/UltraWolf/shares/7cd57b362f86462cac0e3c1b67c957fa/=${encodeURIComponent(url)}`;
+            const proxyUrl = "https://www.pythonanywhere.com/user/UltraWolf/shares/7cd57b362f86462cac0e3c1b67c957fa/=${encodeURIComponent(url)}";
 
             iframe.src = proxyUrl;
             iframe.style.display = 'block';
