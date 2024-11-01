@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Madimi+One&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frognet - Official</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #76db76;
+        }
+        #search-bar {
+            margin: 20px;
+            width: 80%;
+            height: 40px;
+            border-radius: 28px;
+            font-family: 'Madimi One', sans-serif;
+            color: black;
+            padding-left: 10px;
+        }
+        button {
+            font-family: 'Madimi One', sans-serif;
+            color: black;
+            background-color: #f0f0f0;
+            border: none;
+            border-radius: 12px;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #d0d0d0;
+        }
+        #iframe-container {
+            width: 100%;
+            height: 90vh;
+            border: none;
+            display: none;
+        }
+        #error-message {
+            color: red;
+            font-family: 'Madimi One', sans-serif;
+            font-size: 18px;
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="font-family: 'Madimi One', sans-serif; font-size: 72px; color: white;">Frognet</h1>
+    <input type="text" id="search-bar" placeholder="Enter website URL (e.g., https://www.example.com)" />
+    <button onclick="loadWebsite()">Go</button>
+
+    <iframe id="iframe-container"></iframe>
+    <div id="error-message">Failed to load the website. Please ensure the URL is correct and the website allows embedding.</div>
+
+    <script>
+    function loadWebsite() {
+        const url = document.getElementById('search-bar').value;
+        const iframe = document.getElementById('iframe-container');
+        const errorMessage = document.getElementById('error-message');
+
+        if (url && (url.startsWith('http://') || url.startsWith('https://'))) {
+            const proxyUrl = `https://17cd3832-3a7f-4873-b68d-d8cb7ca09328-00-20e2xucf70dmz.worf.replit.dev/fetch?url=${encodeURIComponent(url)}`;
+
+            iframe.src = proxyUrl;
+            iframe.style.display = 'block';
+
+            iframe.onload = function() {
+                errorMessage.style.display = 'none';
+            };
+
+            iframe.onerror = function() {
+                iframe.style.display = 'none';
+                errorMessage.style.display = 'block';
+            };
+        } else {
+            alert('Please enter a valid URL that starts with http:// or https://');
+        }
+    }
+</script>
+
+</body>
+</html>
